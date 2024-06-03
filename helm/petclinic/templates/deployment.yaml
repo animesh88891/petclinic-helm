@@ -1,5 +1,3 @@
-#Deployment
-###controllers/pb-deploy.tml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9,6 +7,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   minReadySeconds: 5
   revisionHistoryLimit: 10
   selector:
@@ -27,6 +27,3 @@ spec:
         - containerPort: 8080
       imagePullSecrets:
       - name: regcred
-
-
-
